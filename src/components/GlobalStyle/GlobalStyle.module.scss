@@ -1,0 +1,13 @@
+:root {
+    --mainbg: #202124;
+    --mainbd: #5f6368;
+    --maincl: #e8eaed;
+}
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    background-color: var(--mainbg);
+    color: var(--maincl);
+}
