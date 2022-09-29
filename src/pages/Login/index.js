@@ -67,7 +67,7 @@ function Login() {
     return (
         <div className={cx('wrapper')}>
             <form className={cx('login')} action="">
-                <h1>LOGIN</h1>
+                <h1>LOG IN</h1>
                 <div className={cx('input-group')}>
                     <label>User name: </label>
                     <input
@@ -110,10 +110,12 @@ function Login() {
                 <button className={cx('submit')} onClick={handleLogin}>
                     Login
                 </button>
-                <Link to="/signin" className={cx('signin')}>
-                    Sign in account
-                </Link>
-                <Link to="/" className={cx('loginSucceeds')} style={{ visibility: 'hidden' }}></Link>
+                <footer>
+                    <Link to="/signin" className={cx('signin')}>
+                        Sign in account
+                    </Link>
+                    <Link to="/" className={cx('loginSucceeds')} style={{ visibility: 'visible' }}></Link>
+                </footer>
             </form>
         </div>
     );

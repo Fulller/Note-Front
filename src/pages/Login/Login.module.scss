@@ -69,10 +69,14 @@
                 background-color: rgba(69, 69, 244, 0.4);
             }
         }
-        .signin {
-            margin-top: 24px;
+        footer {
             width: 100%;
+            text-align: start;
+            margin-top: 24px;
             color: #3cdfff;
+            .signin {
+                margin-right: 12px;
+            }
         }
     }
 }
