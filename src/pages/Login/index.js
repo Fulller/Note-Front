@@ -110,6 +110,9 @@ function Login() {
                 <button className={cx('submit')} onClick={handleLogin}>
                     Login
                 </button>
+                <Link to="/signin" className={cx('signin')}>
+                    Sign in account
+                </Link>
                 <Link to="/" className={cx('loginSucceeds')} style={{ visibility: 'hidden' }}></Link>
             </form>
         </div>
