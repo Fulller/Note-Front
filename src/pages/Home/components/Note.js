@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import style from '../Home.module.scss';
 
 let cx = classNames.bind(style);
-function Note({ HomeController, title = '', value = '', type }) {
+function Note({ HomeController, title = '', value = '', type, id }) {
     let [iTitle, setITitle] = useState(title);
     let [iValue, setIValue] = useState(value);
     function handleEnterTitle(e) {
@@ -20,6 +20,9 @@ function Note({ HomeController, title = '', value = '', type }) {
                 }
                 break;
             }
+            case 'update': {
+                HomeController.updateNote(id, iTitle, iValue);
+            }
         }
     }
     return (
@@ -30,6 +33,7 @@ function Note({ HomeController, title = '', value = '', type }) {
                 value={iTitle}
                 onChange={handleEnterTitle}
                 placeholder="Enter title note..."
+                spellCheck="false"
             ></input>
             <InputItem iValue={iValue} setIValue={setIValue} handleCreateandUpdate={handleCreateandUpdate}></InputItem>
         </div>

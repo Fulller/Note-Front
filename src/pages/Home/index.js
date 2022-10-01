@@ -5,8 +5,7 @@ import { GlobalContext } from '../../App';
 import classNames from 'classnames/bind';
 import style from './Home.module.scss';
 import Note from './components/Note';
-import InputItem from './components/InputItem';
-import { allnotes, createnote } from '../../services';
+import { allnotes, createnote, updatenote } from '../../services';
 
 let cx = classNames.bind(style);
 function Home() {
@@ -23,6 +22,10 @@ function Home() {
             this.loadAllNote(userName);
             window.location.reload();
         },
+        updateNote: async function (id, title, value) {
+            console.log(id);
+            let data = await updatenote(id, title, value);
+        },
     };
     useEffect(() => {
         HomeController.loadAllNote(userName);
@@ -35,12 +38,14 @@ function Home() {
             <div className={cx('wrapper-note')}>
                 {allNote
                     ? allNote.map((note, index) => {
+                          console.log(note);
                           return (
                               <Note
                                   key={index}
                                   HomeController={HomeController}
                                   title={note.title}
                                   value={note.value}
+                                  id={note._id}
                                   type="update"
                               ></Note>
                           );

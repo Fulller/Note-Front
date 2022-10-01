@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
-function createnote(userName, title, value) {
-    let url = `${httpApi}createNote`;
+function updatenote(id, title, value) {
+    let url = `${httpApi}updateNote`;
     return axios({
         method: 'post',
         url: url,
         data: {
-            userName: userName,
+            id: id,
             title: title,
             value: value,
         },
     }).then((data) => data.data);
 }
-export default createnote;
+export default updatenote;
