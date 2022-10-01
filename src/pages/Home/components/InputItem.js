@@ -4,7 +4,7 @@ import style from './InputItem.module.scss';
 import classNames from 'classnames/bind';
 
 let cx = classNames.bind(style);
-function InputItem({ handleCreateandUpdate, iValue, setIValue }) {
+function InputItem({ handleCreateandUpdate, iValue, setIValue, handleFocus }) {
     let [line, setLine] = useState(1);
     useEffect(() => {
         let countLine = 1;
@@ -27,6 +27,7 @@ function InputItem({ handleCreateandUpdate, iValue, setIValue }) {
                 value={iValue}
                 onChange={handleEnterValue}
                 onBlur={handleCreateandUpdate}
+                onFocus={handleFocus}
             ></textarea>
         </div>
     );
