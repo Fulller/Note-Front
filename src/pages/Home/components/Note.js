@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import InputItem from './InputItem';
 import classNames from 'classnames/bind';
 import style from '../Home.module.scss';
+import { doc } from 'prettier';
 
 let cx = classNames.bind(style);
 function Note({ HomeController, title = '', value = '', type, id }) {

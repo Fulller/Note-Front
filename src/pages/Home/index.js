@@ -23,7 +23,6 @@ function Home() {
             window.location.reload();
         },
         updateNote: async function (id, title, value) {
-            console.log(id);
             let data = await updatenote(id, title, value);
         },
     };
@@ -38,7 +37,6 @@ function Home() {
             <div className={cx('wrapper-note')}>
                 {allNote
                     ? allNote.map((note, index) => {
-                          console.log(note);
                           return (
                               <Note
                                   key={index}
