@@ -1,13 +1,20 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import style from './Login.module.scss';
 import classNames from 'classnames/bind';
 
-import { login } from '../../services';
+import { GlobalContext } from '../../App';
+import { login, allnotes } from '../../services';
 import { doc } from 'prettier';
 
 let cx = classNames.bind(style);
 function Login() {
+    let [globalState, dispacth] = useContext(GlobalContext);
+    // if (globalState.isLogin) {
+    //     setTimeout(() => {
+    //         document.querySelector('.loginSucceeds').click();
+    //     }, 1000);
+    // }
     let massageUsername = document.querySelector('.massageUsername');
     let massagePassword = document.querySelector('.massagePassword');
     let massageLogin = document.querySelector('.massageLogin');
@@ -58,6 +65,12 @@ function Login() {
             let data = await login(userNameValue, passwordValue);
             if (data.errCode == 0) {
                 document.querySelector('.loginSucceeds').click();
+                dispacth([
+                    'login',
+                    {
+                        user: data.user,
+                    },
+                ]);
             } else {
                 massageLogin.style.visibility = 'visible';
                 setMassageLogin(data.massage);
