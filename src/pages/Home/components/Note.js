@@ -54,7 +54,7 @@ function Note({ HomeController, title = '', value = '', type, id }) {
         setTimeout(() => {
             e.target.removeChild(e.target.firstElementChild);
             hide();
-        }, 1400);
+        }, 1000);
     }
     return (
         <div ref={modifyRef}>
