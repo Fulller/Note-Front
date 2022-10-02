@@ -11,6 +11,9 @@
     background-color: var(--mainbg);
     color: var(--maincl);
 }
+body {
+    margin: 0;
+}
 ::-webkit-scrollbar {
     width: 0px;
 }

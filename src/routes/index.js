@@ -1,22 +1,26 @@
-import { Home, Login, Signin } from '../pages';
+import { Home, Login, Signin, Account } from '../pages';
 
 let PublicRoute = [
     {
         path: '/',
-        element: Home
+        element: Home,
     },
     {
         path: '/home',
-        element: Home
+        element: Home,
     },
     {
         path: '/login',
-        element: Login
+        element: Login,
     },
     {
         path: '/signin',
-        element: Signin
+        element: Signin,
     },
-]
+    {
+        path: '/account',
+        element: Account,
+    },
+];
 
-export {PublicRoute}
+export { PublicRoute };

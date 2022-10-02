@@ -5,13 +5,11 @@ import { GlobalContext } from '../../App';
 import classNames from 'classnames/bind';
 import style from './Home.module.scss';
 import Note from './components/Note';
+import Header from './components/Header';
 import { allnotes, createnote, updatenote, deletenote } from '../../services';
 
 let cx = classNames.bind(style);
-// window.location.reload();
 function Home() {
-    let a = new FormData();
-    console.log(a);
     let [globalState, dispatch] = useContext(GlobalContext);
     let [allNote, setAllNote] = useState();
     let userName = globalState.user.userName;
@@ -32,12 +30,16 @@ function Home() {
             await deletenote(id);
             this.loadAllNote(userName);
         },
+        logOut: function () {
+            dispatch(['logout']);
+        },
     };
     useEffect(() => {
         HomeController.loadAllNote(userName);
     }, [userName]);
     return (
         <div className={cx('wrapper')}>
+            <Header></Header>
             <div className={cx('create-note')}>
                 <Note HomeController={HomeController} type="create"></Note>
             </div>
