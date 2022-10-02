@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import style from './Home.module.scss';
 import Note from './components/Note';
 import { allnotes, createnote, updatenote, deletenote } from '../../services';
+import Header from './components/Header';
 
 let cx = classNames.bind(style);
 // window.location.reload();
@@ -38,6 +39,7 @@ function Home() {
     }, [userName]);
     return (
         <div className={cx('wrapper')}>
+            <Header></Header>
             <div className={cx('create-note')}>
                 <Note HomeController={HomeController} type="create"></Note>
             </div>
