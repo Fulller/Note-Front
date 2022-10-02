@@ -35,9 +35,9 @@
             border-radius: 6px;
             padding: 4px;
             &:hover {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: black;
                 h3 {
-                    background-color: rgba(255, 255, 255, 0.1);
+                    background-color: black;
                 }
             }
             .name {
@@ -201,16 +201,14 @@
     right: 10px;
     top: 10px;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
     animation: showAccount 0.3s;
     transition: all 0.3s;
     div {
         padding: 8px;
         font-size: 20px;
-        background-color: rgba(255, 255, 255, 0.07);
         display: flex;
         text-align: start;
         width: 100%;
@@ -221,6 +219,7 @@
             height: 100px;
             border-radius: 100%;
             object-fit: cover;
+            border: 1px solid var(--mainbd);
         }
         button {
             width: 100%;
@@ -228,6 +227,8 @@
             font-size: 20px;
             border-radius: 18px;
             margin: 0px 20px;
+            border: 1px solid var(--mainbd);
+
             &:hover {
                 background-color: black;
             }
