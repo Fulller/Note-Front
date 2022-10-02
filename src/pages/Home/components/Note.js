@@ -43,7 +43,7 @@ function Note({ HomeController, title = '', value = '', type, id }) {
     function ActionPopper() {
         return (
             <div className={cx('action-popper')}>
-                <div>Delete note</div>
+                <div onClick={() => HomeController.deleteNote(id)}>Delete note</div>
                 <div onClick={coppyClipboard}>Coppy content to clipboard</div>
             </div>
         );

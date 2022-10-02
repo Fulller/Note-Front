@@ -1,14 +1,17 @@
-import { useContext, useState, useEffect, useRef, useReducer } from 'react';
+import { useContext, useState, useEffect, useRef, useReducer, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { GlobalContext } from '../../App';
 import classNames from 'classnames/bind';
 import style from './Home.module.scss';
 import Note from './components/Note';
-import { allnotes, createnote, updatenote } from '../../services';
+import { allnotes, createnote, updatenote, deletenote } from '../../services';
 
 let cx = classNames.bind(style);
+// window.location.reload();
 function Home() {
+    let a = new FormData();
+    console.log(a);
     let [globalState, dispatch] = useContext(GlobalContext);
     let [allNote, setAllNote] = useState();
     let userName = globalState.user.userName;
@@ -25,6 +28,10 @@ function Home() {
         updateNote: async function (id, title, value) {
             let data = await updatenote(id, title, value);
         },
+        deleteNote: async function (id) {
+            await deletenote(id);
+            this.loadAllNote(userName);
+        },
     };
     useEffect(() => {
         HomeController.loadAllNote(userName);
@@ -37,7 +44,9 @@ function Home() {
             <div className={cx('wrapper-note')}>
                 {allNote
                     ? allNote.map((note, index) => {
-                          return (
+                          return note.isDelete ? (
+                              <Fragment></Fragment>
+                          ) : (
                               <Note
                                   key={index}
                                   HomeController={HomeController}
