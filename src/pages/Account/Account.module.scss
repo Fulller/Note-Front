@@ -1,0 +1,135 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 4px;
+
+    .account {
+        border: 1px solid var(--mainbd);
+        padding: 16px;
+        border-radius: 16px;
+        width: 600px;
+        max-width: 100%;
+        position: relative;
+
+        .home {
+            position: absolute;
+            right: -1px;
+            background-color: var(--mainbd);
+            width: 40px;
+            height: 40px;
+            top: -1px;
+            border-radius: 0px 16px;
+            border: 1px solid var(--mainbd);
+
+            i {
+                background-color: var(--mainbd);
+            }
+            &:hover {
+                background-color: black;
+                border: 1px solid var(--mainbd);
+                i {
+                    background-color: black;
+                }
+            }
+        }
+        .avatar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 12px;
+
+            div {
+                position: relative;
+
+                &:hover {
+                    label {
+                        display: block;
+                    }
+                }
+                img {
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 50% 50% 0 50%;
+                    border: 1px solid var(--mainbd);
+                }
+                input {
+                    display: none;
+                }
+                label {
+                    display: none;
+                    position: absolute;
+                    bottom: 8px;
+                    right: 4px;
+                    padding: 8px;
+                    font-size: 20px;
+                    border-radius: 25%;
+                }
+            }
+        }
+
+        .password,
+        .name {
+            display: flex;
+            flex-direction: row;
+            .input-group {
+                padding: 10px;
+                border: 1px solid var(--mainbd);
+                border-radius: 8px;
+                position: relative;
+                flex: 1;
+                margin: 8px;
+
+                input {
+                    font-size: 20px;
+                    width: 100%;
+                    outline: none;
+                }
+                label {
+                    position: absolute;
+                    top: -10px;
+                    padding: 0px 4px;
+                }
+                &:focus-within {
+                    border: 1px solid rgb(126, 126, 248);
+                    label {
+                        color: rgb(126, 126, 248);
+                    }
+                }
+            }
+        }
+        .action {
+            display: flex;
+            justify-content: end;
+            padding: 8px;
+            button {
+                padding: 8px;
+                margin-left: 24px;
+                background-color: var(--mainbd);
+                border-radius: 8px;
+                font-size: 20px;
+                &:hover {
+                    background-color: black;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 560px) {
+    .wrapper {
+        .account {
+            .password,
+            .name {
+                flex-direction: column;
+
+                .input-group {
+                    width: 100%;
+                    min-width: 100%;
+                    margin: 8px 0px;
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-function getLocalStorage(key, defaultValue) {
+function getLocalStorage(key, defaultValue = '') {
     let result = localStorage.getItem(key);
     if (result) {
         return JSON.parse(result);

@@ -10,11 +10,12 @@ let GlobalContext = createContext();
 let isLogin = getLocalStorage('notelogin', false);
 let user = getLocalStorage('noteuser', {});
 let allnotes = getLocalStorage('noteall', {});
+let languagelc = getLocalStorage('notelanguage', 'vi');
 let initState = {
     isLogin: isLogin,
     user: user,
     allnotes: allnotes,
-    language: 'vi',
+    language: languagelc,
 };
 function reducer(state, [action, data]) {
     switch (action) {
@@ -37,17 +38,24 @@ function reducer(state, [action, data]) {
                 isLogin: false,
             };
         case 'languageEN': {
+            setLocalStorage('notelanguage', 'en');
             return {
                 ...state,
                 language: 'en',
             };
         }
         case 'languageVI': {
+            setLocalStorage('notelanguage', 'vi');
             return {
                 ...state,
                 language: 'vi',
             };
         }
+        case 'reload':
+            return {
+                ...state,
+                user: data,
+            };
         default:
             return true;
     }

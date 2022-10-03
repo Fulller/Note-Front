@@ -33,5 +33,8 @@ let laguage = {
     restore: { en: 'Restore', vi: 'Thu hồi' },
     clikmetologin: { en: 'Click me to log in', vi: 'Nhấn để đăng nhập' },
     coppied: { en: 'Clipboad coppied !', vi: 'Đã sao chép vào clipboad' },
+    newpassword: { en: 'New password', vi: 'Mật khẩu mới' },
+    cancel: { en: 'Cancel', vi: 'Hủy' },
+    save: { en: 'Save', vi: 'Lưu' },
 };
 export default laguage;

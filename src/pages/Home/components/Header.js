@@ -14,7 +14,6 @@ function Header({ HomeController, page }) {
     let [showAccount, setShowAccount] = useState(false);
     let [showMenu, setShowMenu] = useState(false);
     let user = globalState.user;
-    user.avatar = 'https://anhdephd.vn/wp-content/uploads/2022/02/tai-anh-avatar-dep-hinh-dai-dien-facebook.jpg';
     function handleShow(show, setShow) {
         show ? setShow(false) : setShow(true);
     }
@@ -48,7 +47,6 @@ function Header({ HomeController, page }) {
     function MenuPopper() {
         function handleActive(e) {
             let unactive = document.querySelector('.active');
-            console.log(unactive);
         }
         return (
             <div className={cx('menu-popper')}>

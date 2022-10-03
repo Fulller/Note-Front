@@ -6,3 +6,5 @@ export { default as updatenote } from './updatenote';
 export { default as deletenote } from './deletenote';
 export { default as restore } from './restore';
 export { default as foreverdelete } from './foreverdelete';
+export { default as updateavatar } from './updateavatar';
+export { default as updateuser } from './updateuser';
