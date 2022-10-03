@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 
 import { GlobalContext } from '../../../App';
 import style from '../Home.module.scss';
+import language from '../../../assets/language';
 
 let cx = classNames.bind(style);
 function Header({ HomeController, page }) {
     let [globalState, dispatch] = useContext(GlobalContext);
+    let languageName = globalState.language;
     let [showAccount, setShowAccount] = useState(false);
     let [showMenu, setShowMenu] = useState(false);
     let user = globalState.user;
@@ -26,20 +28,28 @@ function Header({ HomeController, page }) {
                 </Link>
                 <Link to={'/account'}>
                     <div>
-                        <button>Manage your account</button>
+                        <button>{language.manegeyouraccount[languageName]}</button>
                     </div>
                 </Link>
-                <div>Full name: {user.firstName + ' ' + user.lastName}</div>
-                <div>User name: {user.userName}</div>
+                <div>
+                    {language.fullname[languageName]}: {user.firstName + ' ' + user.lastName}
+                </div>
+                <div>
+                    {language.username[languageName]}: {user.userName}
+                </div>
                 <Link to={'/login'}>
                     <div onClick={() => dispatch(['logout'])}>
-                        <button>Log out</button>
+                        <button>{language.logout[languageName]}</button>
                     </div>
                 </Link>
             </div>
         );
     }
     function MenuPopper() {
+        function handleActive(e) {
+            let unactive = document.querySelector('.active');
+            console.log(unactive);
+        }
         return (
             <div className={cx('menu-popper')}>
                 <div
@@ -50,7 +60,7 @@ function Header({ HomeController, page }) {
                     className={cx(page == 'allnote' ? 'active' : '')}
                 >
                     <i class="fa-regular fa-lightbulb"></i>
-                    <span>All note</span>
+                    <span>{language.allnote[languageName]}</span>
                 </div>
                 <div
                     onClick={() => {
@@ -60,7 +70,27 @@ function Header({ HomeController, page }) {
                     className={cx(page == 'garbage' ? 'active' : '')}
                 >
                     <i className="fa-regular fa-trash-can"></i>
-                    <span>Garbage can</span>
+                    <span>{language.grabagecan[languageName]}</span>
+                </div>
+                <div className={cx('language')}>
+                    <span
+                        className={cx(languageName == 'vi' ? 'active' : '')}
+                        onClick={(e) => {
+                            dispatch(['languageVI']);
+                            setShowMenu(false);
+                        }}
+                    >
+                        Tiếng việt
+                    </span>
+                    <span
+                        className={cx(languageName == 'en' ? 'active' : '')}
+                        onClick={(e) => {
+                            dispatch(['languageEN']);
+                            setShowMenu(false);
+                        }}
+                    >
+                        English
+                    </span>
                 </div>
             </div>
         );
@@ -95,7 +125,7 @@ function Header({ HomeController, page }) {
                 <div className={cx('header-acount')}>
                     <Link to={'/login'}>
                         <div className={cx('name')}>
-                            <h3>Click me to log in</h3>
+                            <h3>{language.clikmetologin[languageName]}</h3>
                         </div>
                     </Link>
                 </div>

@@ -1,12 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import style from './Signin.module.scss';
 import classNames from 'classnames/bind';
 
 import { register } from '../../services';
+import language from '../../assets/language';
+import { GlobalContext } from '../../App';
 
 let cx = classNames.bind(style);
 function Signin() {
+    let [globalState, dispacth] = useContext(GlobalContext);
+    let languageName = globalState.language;
     let [usernameValue, setUsernameValue] = useState('');
     let [firstValue, setFirstValue] = useState('');
     let [lastnameValue, setLastnameValue] = useState('');
@@ -39,80 +43,80 @@ function Signin() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('signin')}>
-                <h1>SIGN IN</h1>
+                <h1>{language.signin[languageName]}</h1>
                 <div className={cx('parent-group')}>
                     <div className={cx(['input-group', 'username-group'])}>
-                        <label>User name:</label>
+                        <label>{language.username[languageName]}</label>
                         <input
                             onBlur={(e) => validateInput(e.target, 'message-username')}
                             spellCheck="false"
                             onInput={(e) => handleInput(e.target, 'message-username', setUsernameValue)}
                             className={cx('username')}
-                            placeholder="Enter user name..."
+                            placeholder={language.enteryourusername[languageName]}
                         ></input>
                     </div>
                 </div>
                 <div className={cx('message-group')}>
-                    <p className={cx('message-username')}>Please enter your user name</p>
+                    <p className={cx('message-username')}>{language.pleaseusername[languageName]}</p>
                 </div>
                 <div className={cx('parent-group')}>
                     <div className={cx('input-group')}>
-                        <label>First name:</label>
+                        <label>{language.firstname[languageName]}</label>
                         <input
                             onBlur={(e) => validateInput(e.target, 'message-firstname')}
                             onInput={(e) => handleInput(e.target, 'message-firstname', setFirstValue)}
                             spellCheck="false"
                             className={cx('firstname')}
-                            placeholder="Enter first name..."
+                            placeholder={language.enterfirstname[languageName]}
                         ></input>
                     </div>
                     <div className={cx('input-group')}>
-                        <label>Last name:</label>
+                        <label>{language.lastname[languageName]}</label>
                         <input
                             onBlur={(e) => validateInput(e.target, 'message-lastname')}
                             onInput={(e) => handleInput(e.target, 'message-lastname', setLastnameValue)}
                             spellCheck="false"
                             className={cx('lastname')}
-                            placeholder="Enter last name..."
+                            placeholder={language.enterlastname[languageName]}
                         ></input>
                     </div>
                 </div>
                 <div className={cx('message-group')}>
-                    <p className={cx('message-firstname')}>Please enter your first name</p>
-                    <p className={cx('message-lastname')}>Please enter your last name</p>
+                    <p className={cx('message-firstname')}>{language.plaasefirstname[languageName]}</p>
+                    <p className={cx('message-lastname')}>{language.pleaselastname[languageName]}</p>
                 </div>
                 <div className={cx('parent-group')}>
                     <div className={cx('input-group')}>
-                        <label>Password: </label>
+                        <label>{language.pasword[languageName]}</label>
                         <input
                             onBlur={(e) => validateInput(e.target, 'message-password')}
                             onInput={(e) => handleInput(e.target, 'message-password', setPasswordValue)}
                             spellCheck="false"
                             className={cx('password')}
-                            placeholder="Enter password..."
+                            placeholder={language.enterpassword[languageName]}
                         ></input>
                     </div>
                     <div className={cx('input-group')}>
-                        <label>Re-enter the password again: </label>
+                        <label>{language.repassword[languageName]}</label>
                         <input
                             onBlur={(e) => validateInput(e.target, 'message-password-again')}
                             onInput={(e) => handleInput(e.target, 'message-password-again', setRepasswordValue)}
                             spellCheck="false"
                             className={cx('re-password')}
-                            placeholder="Enter re-password..."
+                            placeholder={language.enterrepassword[languageName]}
                         ></input>
                     </div>
                 </div>
                 <div className={cx('message-group')}>
-                    <p className={cx('message-password')}>Please enter your password</p>
-                    <p className={cx('message-password-again')}>Please enter your password</p>
+                    <p className={cx('message-password')}>{language.pleasepassword[languageName]}</p>
+                    <p className={cx('message-password-again')}>{language.pleasepassword[languageName]}</p>
                 </div>
                 <button type="submit" className={cx('signin-btn')} onClick={handleSubmit}>
-                    Sign in
+                    {language.signin[languageName]}
                 </button>
                 <footer>
                     <Link to="/login" className={cx('login')} id="loginofsignin">
-                        Log in
+                        {language.login[languageName]}
                     </Link>
                 </footer>
             </div>

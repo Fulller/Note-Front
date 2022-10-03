@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
 function login(userName, password) {
-    let url = `${httpApi}login`;
+    let url = `${httpApi}/login`;
     return axios({
         method: 'post',
         url: url,

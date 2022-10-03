@@ -7,11 +7,13 @@ import style from './Home.module.scss';
 import Note from './components/Note';
 import NoteGarbage from './components/NoteGarbage';
 import Header from './components/Header';
+import language from '../../assets/language';
 import { allnotes, createnote, updatenote, deletenote, restore, foreverdelete } from '../../services';
 
 let cx = classNames.bind(style);
 function Home() {
     let [globalState, dispatch] = useContext(GlobalContext);
+    let languageName = globalState.language;
     let [allNote, setAllNote] = useState();
     let [page, setPage] = useState('allnote');
     let userName = globalState.user.userName;
@@ -99,7 +101,7 @@ function Home() {
                     <Note HomeController={HomeController} type="create"></Note>
                 </div>
             ) : (
-                <h1>Notes in the trash will be deleted after 7 days</h1>
+                <h1>{language.notifidelete7day[languageName]}</h1>
             )}
             <div className={cx('wrapper-note')}>
                 <Page></Page>

@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 import InputItem from './InputItem';
 import classNames from 'classnames/bind';
 import style from '../Home.module.scss';
 import { doc } from 'prettier';
 import Tippy from '@tippyjs/react/headless';
 
+import { GlobalContext } from '../../../App';
+import language from '../../../assets/language';
+
 let cx = classNames.bind(style);
 function Note({ HomeController, title = '', value = '', type, id }) {
+    let [globalState, dispacth] = useContext(GlobalContext);
+    let laguageName = globalState.language;
     let [iTitle, setITitle] = useState(title);
     let [iValue, setIValue] = useState(value);
     let modifyRef = useRef();
@@ -43,14 +48,14 @@ function Note({ HomeController, title = '', value = '', type, id }) {
     function ActionPopper() {
         return (
             <div className={cx('action-popper')}>
-                <div onClick={() => HomeController.deleteNote(id)}>Delete note</div>
-                <div onClick={coppyClipboard}>Coppy content to clipboard</div>
+                <div onClick={() => HomeController.deleteNote(id)}>{language.deletenote[laguageName]}</div>
+                <div onClick={coppyClipboard}>{language.coppyclipboad[laguageName]}</div>
             </div>
         );
     }
     function coppyClipboard(e) {
         navigator.clipboard.writeText(iValue);
-        e.target.innerHTML += '<span>Clipboad coppied!</span>';
+        e.target.innerHTML += `<span>${language.coppied[laguageName]}</span>`;
         setTimeout(() => {
             e.target.removeChild(e.target.firstElementChild);
             hide();
@@ -64,7 +69,7 @@ function Note({ HomeController, title = '', value = '', type, id }) {
                     className={cx('note-title')}
                     value={iTitle}
                     onChange={handleEnterTitle}
-                    placeholder="Enter title note..."
+                    placeholder={language.entertitilenote[laguageName]}
                     spellCheck="false"
                     onFocus={handleFocus}
                 ></input>

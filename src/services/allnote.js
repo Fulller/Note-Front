@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
 function allnotes(userName) {
-    let url = `${httpApi}allnotes`;
+    let url = `${httpApi}/allnotes`;
     return axios({
         method: 'post',
         url: url,

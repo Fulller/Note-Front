@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
 function foreverdeletenote(id) {
-    let url = `${httpApi}foreverdeleteNote`;
+    let url = `${httpApi}/foreverdeleteNote`;
     return axios({
         method: 'post',
         url: url,

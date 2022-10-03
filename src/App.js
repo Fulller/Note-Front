@@ -4,6 +4,7 @@ import { PublicRoute } from './routes';
 
 import getLocalStorage from './assets/getLocalStorage';
 import setLocalStorage from './assets/setLocalStorage';
+import language from './assets/language';
 
 let GlobalContext = createContext();
 let isLogin = getLocalStorage('notelogin', false);
@@ -13,6 +14,7 @@ let initState = {
     isLogin: isLogin,
     user: user,
     allnotes: allnotes,
+    language: 'vi',
 };
 function reducer(state, [action, data]) {
     switch (action) {
@@ -34,6 +36,18 @@ function reducer(state, [action, data]) {
                 allnotes: {},
                 isLogin: false,
             };
+        case 'languageEN': {
+            return {
+                ...state,
+                language: 'en',
+            };
+        }
+        case 'languageVI': {
+            return {
+                ...state,
+                language: 'vi',
+            };
+        }
         default:
             return true;
     }

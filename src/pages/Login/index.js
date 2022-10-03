@@ -6,15 +6,17 @@ import classNames from 'classnames/bind';
 import { GlobalContext } from '../../App';
 import { login, allnotes } from '../../services';
 import { doc } from 'prettier';
+import language from '../../assets/language';
 
 let cx = classNames.bind(style);
 function Login() {
     let [globalState, dispacth] = useContext(GlobalContext);
-    // if (globalState.isLogin) {
-    //     setTimeout(() => {
-    //         document.querySelector('.loginSucceeds').click();
-    //     }, 1000);
-    // }
+    let laguageName = globalState.language;
+    if (globalState.isLogin) {
+        setTimeout(() => {
+            document.querySelector('.loginSucceeds').click();
+        }, 1000);
+    }
     let massageUsername = document.querySelector('.massageUsername');
     let massagePassword = document.querySelector('.massagePassword');
     let massageLogin = document.querySelector('.massageLogin');
@@ -80,9 +82,9 @@ function Login() {
     return (
         <div className={cx('wrapper')}>
             <form className={cx('login')} action="">
-                <h1>LOG IN</h1>
+                <h1>{language.login[laguageName]}</h1>
                 <div className={cx('input-group')}>
-                    <label>User name: </label>
+                    <label>{language.username[laguageName]} </label>
                     <input
                         onChange={(e) => {
                             handleEntetUserName(e);
@@ -91,17 +93,18 @@ function Login() {
                         }}
                         onBlur={validateUserName}
                         spellCheck="false"
-                        placeholder="Enter your username..."
+                        // placeholder="Enter user name ..."
+                        placeholder={language.enteryourusername[laguageName]}
                         name="userName"
                     ></input>
                 </div>
-                <p className={cx('massageUsername')}>Please enter your Username</p>
+                <p className={cx('massageUsername')}>{language.pleaseusername[laguageName]}</p>
                 <div className={cx('input-group')}>
-                    <label>Password: </label>
+                    <label>{language.pasword[laguageName]} </label>
                     <input
                         type="password"
                         ref={passwordRef}
-                        placeholder="Enter your password..."
+                        placeholder={language.enterpassword[laguageName]}
                         name="password"
                         spellCheck="false"
                         onChange={(e) => {
@@ -118,14 +121,14 @@ function Login() {
                         ></i>
                     </span>
                 </div>
-                <p className={cx('massagePassword')}>Please enter your Password</p>
+                <p className={cx('massagePassword')}>{language.pleasepassword[laguageName]}</p>
                 <p className={cx('massageLogin')}>{massageLoginValue}</p>
                 <button className={cx('submit')} onClick={handleLogin}>
-                    Login
+                    {language.login[laguageName]}
                 </button>
                 <footer>
                     <Link to="/signin" className={cx('signin')}>
-                        Sign in account
+                        {language.signinaccount[laguageName]}
                     </Link>
                     <Link to="/" className={cx('loginSucceeds')} style={{ visibility: 'visible' }}></Link>
                 </footer>
