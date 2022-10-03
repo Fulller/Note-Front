@@ -10,6 +10,7 @@
 
     header {
         position: fixed;
+        z-index: 3;
         top: 0;
         left: 0;
         right: 0;
@@ -23,7 +24,9 @@
         .header-menu {
             i {
                 font-size: 24px;
-                padding: 14px;
+                padding: 12px 14px;
+                background-color: rgba(255, 255, 255, 0.06);
+                border-radius: 50%;
             }
         }
         .header-acount {
@@ -213,6 +216,7 @@
         text-align: start;
         width: 100%;
         text-decoration: none;
+        background-color: rgba(255, 255, 255, 0.1);
 
         img {
             width: 100px;
@@ -245,6 +249,47 @@
         to {
             transform: translateX(0px);
             opacity: 1;
+        }
+    }
+}
+.menu-popper {
+    width: 300px;
+    border: 1px solid var(--mainbd);
+    position: fixed;
+    z-index: 5;
+    top: -2px;
+    left: -36px;
+    bottom: 0;
+    height: calc(100vh - 64px);
+    padding: 8px;
+    animation: showMenu 0.3s;
+    .active {
+        background-color: rgba(0, 0, 255, 0.2);
+    }
+    div {
+        padding: 8px 24px;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        margin-bottom: 12px;
+
+        &:hover {
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+        i {
+            margin-right: 24px;
+        }
+        span {
+            font-size: 18px;
+            background-color: transparent;
+        }
+    }
+    @keyframes showMenu {
+        from {
+            transform: translateX(-300px);
+        }
+        to {
+            transform: translateX(0);
         }
     }
 }

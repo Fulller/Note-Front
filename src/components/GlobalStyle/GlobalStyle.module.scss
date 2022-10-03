@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 :root {
     --mainbg: #202124;
     --mainbd: #5f6368;
@@ -10,6 +11,7 @@
     box-sizing: border-box;
     background-color: var(--mainbg);
     color: var(--maincl);
+    font-family: 'Roboto', sans-serif;
 }
 body {
     margin: 0;

@@ -7,9 +7,10 @@ import { GlobalContext } from '../../../App';
 import style from '../Home.module.scss';
 
 let cx = classNames.bind(style);
-function Header() {
+function Header({ HomeController, page }) {
     let [globalState, dispatch] = useContext(GlobalContext);
     let [showAccount, setShowAccount] = useState(false);
+    let [showMenu, setShowMenu] = useState(false);
     let user = globalState.user;
     user.avatar = 'https://anhdephd.vn/wp-content/uploads/2022/02/tai-anh-avatar-dep-hinh-dai-dien-facebook.jpg';
     function handleShow(show, setShow) {
@@ -32,17 +33,50 @@ function Header() {
                 <div>User name: {user.userName}</div>
                 <Link to={'/login'}>
                     <div onClick={() => dispatch(['logout'])}>
-                        <button>Sign out</button>
+                        <button>Log out</button>
                     </div>
                 </Link>
             </div>
         );
     }
+    function MenuPopper() {
+        return (
+            <div className={cx('menu-popper')}>
+                <div
+                    onClick={() => {
+                        setShowMenu(false);
+                        HomeController.changePage('allnote');
+                    }}
+                    className={cx(page == 'allnote' ? 'active' : '')}
+                >
+                    <i class="fa-regular fa-lightbulb"></i>
+                    <span>All note</span>
+                </div>
+                <div
+                    onClick={() => {
+                        setShowMenu(false);
+                        HomeController.changePage('garbage');
+                    }}
+                    className={cx(page == 'garbage' ? 'active' : '')}
+                >
+                    <i className="fa-regular fa-trash-can"></i>
+                    <span>Garbage can</span>
+                </div>
+            </div>
+        );
+    }
     return (
         <header>
-            <div className={cx('header-menu')}>
-                <i className="fa-solid fa-bars"></i>
-            </div>
+            <Tippy
+                onClickOutside={() => setShowMenu(false)}
+                visible={showMenu}
+                render={(attrs) => <MenuPopper></MenuPopper>}
+                interactive={true}
+            >
+                <div onClick={() => handleShow(showMenu, setShowMenu)} className={cx('header-menu')}>
+                    <i className="fa-solid fa-bars"></i>
+                </div>
+            </Tippy>
             {globalState.isLogin ? (
                 <Tippy
                     onClickOutside={() => setShowAccount(false)}
@@ -61,7 +95,7 @@ function Header() {
                 <div className={cx('header-acount')}>
                     <Link to={'/login'}>
                         <div className={cx('name')}>
-                            <h3>Please login to use the service</h3>
+                            <h3>Click me to log in</h3>
                         </div>
                     </Link>
                 </div>

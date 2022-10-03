@@ -5,15 +5,20 @@ import { GlobalContext } from '../../App';
 import classNames from 'classnames/bind';
 import style from './Home.module.scss';
 import Note from './components/Note';
+import NoteGarbage from './components/NoteGarbage';
 import Header from './components/Header';
-import { allnotes, createnote, updatenote, deletenote } from '../../services';
+import { allnotes, createnote, updatenote, deletenote, restore, foreverdelete } from '../../services';
 
 let cx = classNames.bind(style);
 function Home() {
     let [globalState, dispatch] = useContext(GlobalContext);
     let [allNote, setAllNote] = useState();
+    let [page, setPage] = useState('allnote');
     let userName = globalState.user.userName;
     let HomeController = {
+        changePage: function (namePage) {
+            setPage(namePage);
+        },
         loadAllNote: async function (userName) {
             let allNoteData = await allnotes(userName);
             setAllNote(allNoteData.data.reverse());
@@ -30,36 +35,74 @@ function Home() {
             await deletenote(id);
             this.loadAllNote(userName);
         },
-        logOut: function () {
-            dispatch(['logout']);
+        restoreNote: async function (id) {
+            await restore(id);
+            this.loadAllNote(userName);
+        },
+        foreverdeleteNote: async function (id) {
+            await foreverdelete(id);
+            this.loadAllNote(userName);
         },
     };
     useEffect(() => {
         HomeController.loadAllNote(userName);
     }, [userName]);
+    function Page() {
+        switch (page) {
+            case 'allnote': {
+                return allNote ? (
+                    allNote.map((note, index) => {
+                        return note.isDelete ? (
+                            <Fragment></Fragment>
+                        ) : (
+                            <Note
+                                key={index}
+                                HomeController={HomeController}
+                                title={note.title}
+                                value={note.value}
+                                id={note._id}
+                                type="update"
+                            ></Note>
+                        );
+                    })
+                ) : (
+                    <></>
+                );
+            }
+            case 'garbage': {
+                return allNote ? (
+                    allNote.map((note, index) => {
+                        return note.isDelete ? (
+                            <NoteGarbage
+                                key={index}
+                                HomeController={HomeController}
+                                title={note.title}
+                                value={note.value}
+                                id={note._id}
+                            ></NoteGarbage>
+                        ) : (
+                            <Fragment></Fragment>
+                        );
+                    })
+                ) : (
+                    <></>
+                );
+            }
+        }
+    }
     return (
         <div className={cx('wrapper')}>
-            <Header></Header>
-            <div className={cx('create-note')}>
-                <Note HomeController={HomeController} type="create"></Note>
-            </div>
+            <Header HomeController={HomeController} page={page}></Header>
+
+            {page == 'allnote' ? (
+                <div className={cx('create-note')}>
+                    <Note HomeController={HomeController} type="create"></Note>
+                </div>
+            ) : (
+                <h1>Notes in the trash will be deleted after 7 days</h1>
+            )}
             <div className={cx('wrapper-note')}>
-                {allNote
-                    ? allNote.map((note, index) => {
-                          return note.isDelete ? (
-                              <Fragment></Fragment>
-                          ) : (
-                              <Note
-                                  key={index}
-                                  HomeController={HomeController}
-                                  title={note.title}
-                                  value={note.value}
-                                  id={note._id}
-                                  type="update"
-                              ></Note>
-                          );
-                      })
-                    : ''}
+                <Page></Page>
             </div>
         </div>
     );
