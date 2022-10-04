@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
-function updateuser(id, avatar, firstName, lastName) {
+function updateuser(id, avatar, firstName, lastName, password) {
     let url = `${httpApi}/updateUser`;
     return axios({
         method: 'post',
@@ -10,6 +10,7 @@ function updateuser(id, avatar, firstName, lastName) {
             avatar: avatar,
             firstName: firstName,
             lastName: lastName,
+            password: password,
         },
     }).then((data) => data.data);
 }

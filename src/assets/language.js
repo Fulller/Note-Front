@@ -36,5 +36,10 @@ let laguage = {
     newpassword: { en: 'New password', vi: 'Mật khẩu mới' },
     cancel: { en: 'Cancel', vi: 'Hủy' },
     save: { en: 'Save', vi: 'Lưu' },
+    changepassword: { en: 'Change password', vi: 'Đổi mật khẩu' },
+    deleteaccount: { en: 'Delete account', vi: 'Xóa tài khoảng' },
+    wrongpassword: { en: 'Wrong pasword', vi: 'Sai mật khẩu' },
+    pleasenewpassword: { en: 'Please enter new pasword', vi: 'Hãy nhập mật khẩu mới' },
+    currentpassword: { en: 'Current password', vi: 'Mật khẩu hiện tại' },
 };
 export default laguage;
