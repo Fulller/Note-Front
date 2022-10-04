@@ -8,6 +8,7 @@ import Tippy from '@tippyjs/react/headless';
 import { GlobalContext } from '../../../App';
 import language from '../../../assets/language';
 import { uploadimage } from '../../../services';
+import Image from './Image';
 
 let cx = classNames.bind(style);
 function Note({ HomeController, title = '', value = '', type, id, imagesprops }) {
@@ -18,7 +19,7 @@ function Note({ HomeController, title = '', value = '', type, id, imagesprops })
     let modifyRef = useRef();
     let menuRef = useRef();
     let addimageRef = useRef();
-    let [images, setImages] = useState(imagesprops);
+    let images = imagesprops;
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hide = () => setVisible(false);
@@ -32,7 +33,6 @@ function Note({ HomeController, title = '', value = '', type, id, imagesprops })
                     HomeController.createNote(iTitle, iValue, images);
                     setITitle('');
                     setIValue('');
-                    setImages([]);
                 }
                 break;
             }
@@ -67,6 +67,10 @@ function Note({ HomeController, title = '', value = '', type, id, imagesprops })
     async function handleAddImage(e) {
         let pahthImage = await uploadimage(e.target.files[0]);
         HomeController.updateNote(id, iTitle, iValue, [...images, pahthImage]);
+    }
+    async function handleDeleteImage(index) {
+        images.splice(index, 1);
+        HomeController.updateNote(id, iTitle, iValue, [...images]);
     }
     return (
         <div>
@@ -110,7 +114,9 @@ function Note({ HomeController, title = '', value = '', type, id, imagesprops })
                 )}
                 <div className={cx('show-image')}>
                     {images.map((image, index) => {
-                        return <img src={image}></img>;
+                        return (
+                            <Image link={image} key={index} index={index} handleDeleteImage={handleDeleteImage}></Image>
+                        );
                     })}
                 </div>
                 <InputItem

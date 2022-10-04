@@ -30,7 +30,6 @@ function Home() {
             this.loadAllNote(userName);
         },
         updateNote: async function (id, title, value, images) {
-            console.log(images);
             let data = await updatenote(id, title, value, images);
             this.loadAllNote(userName);
         },

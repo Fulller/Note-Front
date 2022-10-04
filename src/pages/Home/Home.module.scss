@@ -180,10 +180,39 @@
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: center;
-                    img {
-                        height: 300px;
-                        margin: 0 4px 8px 4px;
-                        border-radius: 8px;
+
+                    .image {
+                        position: relative;
+                        margin: 0px 4px 8px 4px;
+                        .delete-image-btn {
+                            right: 4px;
+                            top: 2px;
+                            position: absolute;
+                            padding: 0px;
+                            border: 0;
+                            background-color: transparent;
+                            transition: all 1s;
+                            opacity: 0;
+
+                            &:hover {
+                                i {
+                                    color: black;
+                                }
+                            }
+                            i {
+                                transition: all 1s;
+                                color: var(--maincl);
+                            }
+                        }
+                        img {
+                            height: 200px;
+                            border-radius: 4px;
+                        }
+                        &:hover {
+                            .delete-image-btn {
+                                opacity: 1;
+                            }
+                        }
                     }
                 }
             }
