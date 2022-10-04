@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { register } from '../../services';
 import language from '../../assets/language';
 import { GlobalContext } from '../../App';
+import laguage from '../../assets/language';
 
 let cx = classNames.bind(style);
 function Signin() {
@@ -16,6 +17,7 @@ function Signin() {
     let [lastnameValue, setLastnameValue] = useState('');
     let [passwordValue, setPasswordValue] = useState('');
     let [repasswordValue, setRepasswordValue] = useState('');
+    let [errorMessage, setErrorMessage] = useState('');
     let listValueInput = [usernameValue, firstValue, lastnameValue, passwordValue, repasswordValue];
     function validateInput(input, selectorMessage) {
         let message = document.querySelector(`.${selectorMessage}`);
@@ -34,10 +36,16 @@ function Signin() {
                 return;
             }
         }
+        if (passwordValue != repasswordValue) {
+            setErrorMessage(laguage.passwordnotesame[languageName]);
+            return;
+        }
         let data = await register(listValueInput[0], listValueInput[1], listValueInput[2], listValueInput[3]);
         if (data.errCode == 0) {
             let login = document.querySelector('#loginofsignin');
             login.click();
+        } else {
+            setErrorMessage(data.massage);
         }
     }
     return (
@@ -111,6 +119,7 @@ function Signin() {
                     <p className={cx('message-password')}>{language.pleasepassword[languageName]}</p>
                     <p className={cx('message-password-again')}>{language.pleasepassword[languageName]}</p>
                 </div>
+                <h3 style={{ color: 'red' }}>{errorMessage}</h3>
                 <button type="submit" className={cx('signin-btn')} onClick={handleSubmit}>
                     {language.signin[languageName]}
                 </button>

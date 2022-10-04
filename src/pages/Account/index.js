@@ -4,7 +4,8 @@ import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 
 import setLocalStorage from '../../assets/setLocalStorage';
-import { updateavatar, updateuser } from '../../services';
+import handleImageError from '../../assets/handleImageError';
+import { updateavatar, updateuser, deleteaccount } from '../../services';
 import language from '../../assets/language';
 import { GlobalContext } from '../../App';
 let cx = classNames.bind(style);
@@ -64,6 +65,13 @@ function Account() {
             homeRef.current.click();
         }
     }
+    async function handleSubmitDeleteaccount() {
+        if (passwordValidate()) {
+            let data = await deleteaccount(globalState.user._id);
+            dispacth(['logout']);
+            window.location = '/';
+        }
+    }
     return (
         <div className={cx('wrapper')}>
             <div className={cx('account')}>
@@ -76,7 +84,7 @@ function Account() {
                     <>
                         <div className={cx('avatar')}>
                             <div>
-                                <img src={avatar}></img>
+                                <img src={avatar} onError={handleImageError}></img>
                                 <input
                                     id="avatar-account"
                                     type="file"
@@ -112,7 +120,9 @@ function Account() {
                             <button onClick={() => setPage('changepassword')}>
                                 {language.changepassword[languageName]}
                             </button>
-                            <button>{language.deleteaccount[languageName]}</button>
+                            <button onClick={() => setPage('deleteaccount')}>
+                                {language.deleteaccount[languageName]}
+                            </button>
                         </div>
                         <div className={cx('action')}>
                             <Link to="/home">
@@ -163,6 +173,38 @@ function Account() {
                                 {language.cancel[languageName]}
                             </button>
                             <button className={cx('save')} onClick={hanleSubmitChangepassword}>
+                                {language.save[languageName]}{' '}
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <></>
+                )}
+                {page == 'deleteaccount' ? (
+                    <div className={cx('deleteaccount')}>
+                        <button className={cx('prev')} onClick={() => setPage('information')}>
+                            <i className="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h1>{language.changepassword[languageName]}</h1>
+                        <div className={cx('password')}>
+                            <div className={cx('input-group')}>
+                                <label>{language.currentpassword[languageName]}</label>
+                                <input
+                                    ref={passwordRef}
+                                    className={cx('firstname')}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    onBlur={passwordValidate}
+                                    onInput={() => (mesPasswordRef.current.style.visibility = 'hidden')}
+                                ></input>
+                                <p ref={mesPasswordRef}>{language.wrongpassword[languageName]}</p>
+                            </div>
+                        </div>
+                        <div className={cx('action')}>
+                            <button className={cx('cancel')} onClick={() => setPage('information')}>
+                                {language.cancel[languageName]}
+                            </button>
+                            <button className={cx('save')} onClick={handleSubmitDeleteaccount}>
                                 {language.save[languageName]}{' '}
                             </button>
                         </div>

@@ -1,6 +1,7 @@
 import style from '../Home.module.scss';
 import classNames from 'classnames/bind';
 
+import handleImageError from '../../../assets/handleImageError';
 let cx = classNames.bind(style);
 function Image({ link, index, handleDeleteImage }) {
     return (
@@ -8,7 +9,7 @@ function Image({ link, index, handleDeleteImage }) {
             <button onClick={() => handleDeleteImage(index)} className={cx('delete-image-btn')}>
                 <i className="fa-solid fa-delete-left"></i>
             </button>
-            <img src={link}></img>
+            <img src={link} onError={handleImageError}></img>
         </div>
     );
 }

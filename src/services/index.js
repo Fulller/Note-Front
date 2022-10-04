@@ -9,3 +9,4 @@ export { default as foreverdelete } from './foreverdelete';
 export { default as updateavatar } from './updateavatar';
 export { default as updateuser } from './updateuser';
 export { default as uploadimage } from './uploadimage';
+export { default as deleteaccount } from './deleteaccount';

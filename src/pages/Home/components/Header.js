@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../../App';
 import style from '../Home.module.scss';
 import language from '../../../assets/language';
+import handleImageError from '../../../assets/handleImageError';
 
 let cx = classNames.bind(style);
 function Header({ HomeController, page }) {
@@ -22,7 +23,7 @@ function Header({ HomeController, page }) {
             <div className={cx('account-popper')}>
                 <Link to={'/account'}>
                     <div className={cx('avatar')}>
-                        <img src={user.avatar}></img>
+                        <img src={user.avatar} onError={handleImageError}></img>
                     </div>
                 </Link>
                 <Link to={'/account'}>
@@ -116,7 +117,7 @@ function Header({ HomeController, page }) {
                         <div className={cx('name')}>
                             <h3>{user.lastName}</h3>
                         </div>
-                        <img src={user.avatar}></img>
+                        <img src={user.avatar} onError={handleImageError}></img>
                     </div>
                 </Tippy>
             ) : (
