@@ -28,7 +28,6 @@ function Home() {
         createNote: async function (title, value) {
             await createnote(userName, title, value);
             this.loadAllNote(userName);
-            window.location.reload();
         },
         updateNote: async function (id, title, value) {
             let data = await updatenote(id, title, value);
