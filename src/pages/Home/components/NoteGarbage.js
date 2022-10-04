@@ -9,7 +9,7 @@ import { GlobalContext } from '../../../App';
 import language from '../../../assets/language';
 
 let cx = classNames.bind(NoteGarbageStyle);
-function NoteGarbage({ HomeController, title = '', value = '', type, id }) {
+function NoteGarbage({ HomeController, title = '', value = '', type, id, imagesprops }) {
     let [globalState, dispacth] = useContext(GlobalContext);
     let languageName = globalState.language;
     function countLine() {
@@ -29,6 +29,11 @@ function NoteGarbage({ HomeController, title = '', value = '', type, id }) {
                     {language.deleteforever[languageName]}
                 </button>
                 <button onClick={() => HomeController.restoreNote(id)}>{language.restore[languageName]}</button>
+            </div>
+            <div className={cx('show-image')}>
+                {imagesprops.map((image, index) => {
+                    return <img src={image}></img>;
+                })}
             </div>
             <textarea value={value} rows={countLine()} style={{ resize: 'none' }}></textarea>
         </div>

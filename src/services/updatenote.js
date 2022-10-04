@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { httpApi } from '../assets/api';
-function updatenote(id, title, value) {
+function updatenote(id, title, value, images) {
     let url = `${httpApi}/updateNote`;
     return axios({
         method: 'post',
@@ -9,6 +9,7 @@ function updatenote(id, title, value) {
             id: id,
             title: title,
             value: value,
+            images: images,
         },
     }).then((data) => data.data);
 }

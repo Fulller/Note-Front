@@ -25,12 +25,14 @@ function Home() {
             let allNoteData = await allnotes(userName);
             setAllNote(allNoteData.data.reverse());
         },
-        createNote: async function (title, value) {
-            await createnote(userName, title, value);
+        createNote: async function (title, value, images) {
+            await createnote(userName, title, value, images);
             this.loadAllNote(userName);
         },
-        updateNote: async function (id, title, value) {
-            let data = await updatenote(id, title, value);
+        updateNote: async function (id, title, value, images) {
+            console.log(images);
+            let data = await updatenote(id, title, value, images);
+            this.loadAllNote(userName);
         },
         deleteNote: async function (id) {
             await deletenote(id);
@@ -63,6 +65,7 @@ function Home() {
                                 value={note.value}
                                 id={note._id}
                                 type="update"
+                                imagesprops={note.images}
                             ></Note>
                         );
                     })
@@ -80,6 +83,7 @@ function Home() {
                                 title={note.title}
                                 value={note.value}
                                 id={note._id}
+                                imagesprops={note.images}
                             ></NoteGarbage>
                         ) : (
                             <Fragment></Fragment>
@@ -97,7 +101,7 @@ function Home() {
 
             {page == 'allnote' ? (
                 <div className={cx('create-note')}>
-                    <Note HomeController={HomeController} type="create"></Note>
+                    <Note HomeController={HomeController} type="create" imagesprops={[]}></Note>
                 </div>
             ) : (
                 <h1>{language.notifidelete7day[languageName]}</h1>
